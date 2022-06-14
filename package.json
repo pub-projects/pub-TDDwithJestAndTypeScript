@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest -o --detectOpenHandles",
+    "test:all": "jest --coverage",
     "server:dev": "nodemon --exec ./node_modules/.bin/ts-node -r dotenv/config ./src/server/server.ts",
     "build": "tsc"
   },
