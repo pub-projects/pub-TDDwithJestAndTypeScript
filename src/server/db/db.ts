@@ -1,28 +1,28 @@
-import * as mongoDB from "mongodb";
+import { MongoClient } from "mongodb";
 
-let client: mongoDB.MongoClient;
+let client: any; //Promise<MongoClient>;
 
-export const initializeDbConnection = async (user: string) => {
-  type tmp = string | undefined;
-  let uri: tmp;
-
+export const initializeDbConnection = async () => {
   try {
-    if (user === "admin") uri = process.env.ADMIN_USER_DB_URI as string;
-    else if (user === "user2") uri = process.env.USER2_DB_URI as string;
-    else uri = process.env.USER1_DB_URI as string;
+    const url: string = process.env.USER1_DB_URI as string;
+    console.log("url", url);
 
-    client = await mongoDB.MongoClient.connect(uri);
+    client = await MongoClient.connect(url);
   } catch (err: any) {
     console.error(err.message);
   }
 };
 
-export const getDbConnection = (dbName: string) => {
+export const getDbConnection = async (dbName: string) => {
   try {
-    const db = client.db(dbName);
+    const db = await client.db(dbName);
     return db;
   } catch (err: any) {
     console.error(err.message);
     return null;
   }
+};
+
+export const closeConnection = (): any => {
+  client.close();
 };

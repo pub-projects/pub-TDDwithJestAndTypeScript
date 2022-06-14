@@ -4,8 +4,9 @@
   "description": "Learning to use Jest with TypeScript in a TDD",
   "main": "index.js",
   "scripts": {
-    "test": "jest -o",
-    "server:dev": "nodemon --exec ./node_modules/.bin/ts-node -r dotenv/config ./src/server/server.ts"
+    "test": "jest -o --detectOpenHandles",
+    "server:dev": "nodemon --exec ./node_modules/.bin/ts-node -r dotenv/config ./src/server/server.ts",
+    "build": "tsc"
   },
   "author": "Chris Johannesson",
   "license": "MIT",
